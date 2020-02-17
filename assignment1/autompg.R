@@ -36,8 +36,7 @@ hist(threeCyl$lPer100km, breaks=3, xlab="Lper100km",ylab="count", main="Lper100k
 
 #parallel coordinate plot in blue-orange scale for Lper100km
 #make dataframe without car names 
-reordered <-autompg[,c(2,1,3,4,5,6,7,8,9,10)]
-dfNoCarNames <-subset(reordered, select=-c(name)) # put mpg back in for the negative correlation
+dfNoCarNames <-subset(autompg, select=-c(name))
 blueOrange=blueOrange <-colorRampPalette(c("orange", "blue"))
 theColours = blueOrange(length(lPer100km))
 coloursToPaint = theColours[rank(lPer100km)]
@@ -45,6 +44,7 @@ library(MASS)
 parcoord(dfNoCarNames, col=coloursToPaint, var.label = TRUE)
 
 #Population
+
 population=read.csv(file="/home/nobu/Desktop/stat3990/assignment1/pop.csv")
 worldPop <-subset(population, select=-c(growth))
 plot(worldPop, type="l", main="World Population year 400 to 1800")
