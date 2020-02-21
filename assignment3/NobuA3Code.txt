@@ -1,0 +1,297 @@
+# read in csv and change col names
+iris = read.csv(file="/home/nobu/Desktop/stat3990/data/iris.data")
+plot(iris[,3:4])
+
+#install.packages("plyr")
+library("plyr")
+iris<-rename(iris, c("X5.1"="sepal.len", "X3.5"="sepal.wid", "X1.4"="petal.len", "X0.2"="petal.wid", "Iris.setosa"="class"))
+save(iris, file="iris.rda")
+load("iris.rda")
+
+#divide Versicolor data into 2 groups
+versicolor <- iris[iris$class =='Iris-versicolor',]
+
+#not normally distributed, left skewed
+hist(versicolor$sepal.wid, breaks=10)
+
+sample = versicolor[sample(nrow(versicolor), 30),]
+
+#student's t-test assumes same variance
+t.test(sample$sepal.wid, versicolor$sepal.wid, var.equal = TRUE)
+
+# Welch's t-test assumes different variance
+t.test(versicolor1$sepal.wid, versicolor2$sepal.wid, var.equal = FALSE)
+
+
+# take random samples from versicolor and run t tes
+# Question 3, 2 sided t test 
+
+virginica <- iris[iris$class =='Iris-virginica',]
+
+remove.packages("ggpubr")
+
+#Welch 2 sample t-test
+t.test(versicolor$sepal.wid, virginica$sepal.wid, alternative = "two.sided", var.equal = FALSE)
+
+#question 4 permutation test
+total <- rbind(versicolor, virginica)
+
+library(coin)
+set.seed(101)
+permutation_test <- independence_test(sepal.wid ~ class, data=total)
+# try to plot the permutation
+#https://mac-theobio.github.io/QMEE/permutation_examples.html
+nsim <- 1000
+res <- numeric(nsim)
+
+for(i in 1:nsim){
+  perm <- sample(nrow(total))
+  bdat <- transform(total, sepal.wid = sepal.wid[perm])
+  
+  res[i] <- mean(bdat[bdat$class=="Iris-versicolor","sepal.wid"]) - 
+    (mean(bdat[bdat$class=="Iris-virginica", "sepal.wid"]))
+}
+
+obs <- mean(total[total$class=="Iris-versicolor", "sepal.wid"]) -
+  mean(total[total$class=="Iris-virginica", "sepal.wid"])
+res <- c(res,obs)
+hist(res,col="gray", las=1, main="")
+abline(v=obs,col="red")
+
+#question 5
+
+# use aov
+res_petallen <- aov(petal.len ~ class, data=total)
+summary(res_petallen)
+#use oneway.test
+oneway.test(petal.len ~class, data = total)
+#student's t-test assumes same variance
+t.test(petal.len ~ class, data=total, var.equal = TRUE)
+
+#petal width
+# use aov
+res_petalwid <- aov(petal.wid ~ class, data=total)
+summary(res_petalwid)
+#use oneway.test
+oneway.test(petal.wid ~class, data = total)
+#student's t-test assumes same variance
+t.test(petal.wid ~ class, data=total, var.equal = TRUE)
+
+# use aov
+res_sepallen <- aov(sepal.len ~ class, data=total)
+summary(res_sepallen)
+#use oneway.test
+oneway.test(sepal.len ~class, data = total)
+#student's t-test assumes same variance
+t.test(sepal.len ~ class, data=total, var.equal = TRUE)
+
+# use aov
+res_sepalwid <- aov(sepal.wid ~ class, data=total)
+summary(res_sepalwid)
+#use oneway.test
+oneway.test(sepal.wid ~class, data = total)
+#student's t-test assumes same variance
+t.test(sepal.wid ~ class, data=total, var.equal = TRUE)
+
+#question 6
+x = rep(0,10); x[1]=1
+x
+#Welch's
+t.test(x, alternative = "two.sided", var.equal = FALSE)
+#Student's t-test
+t.test(x, var.equal = TRUE)
+
+#question 7
+library(boot)
+# function to obtain mean of x
+fc <- function(x, indices){
+  dt <- x[indices]
+  c(mean(dt))
+}
+set.seed(123)
+mybootstrap <- boot(x, fc, R=1000)
+head(mybootstrap)
+plot(mybootstrap$t, index=1, main="Boostrap mean of x", xlab="iteration", ylab="bootstrap mean")
+hist(mybootstrap$t, breaks = 10, main="Histogram of Bootstrap mean of X", xlab="mean", xlim = c(-0.1, 0.6))
+summary(mybootstrap)
+boot.ci(mybootstrap, index=1, type='basic')
+
+#question 8
+#replicate 1000 times
+pvalues <- vector()
+for(i in 1:10000){
+  expdist<-rexp(10, rate=1)
+  pvalues[i] = t.test(expdist, mu=1)$p.value
+}
+
+expdist
+head(pvalues)
+pvalues
+hist(pvalues)
+
+small_pvalues <- pvalues[pvalues < 0.1]
+small_pvalues
+hist(small_pvalues)
+
+#question 10
+num_samps = 10000
+points <- matrix(0, nrow=num_samps, ncol=2)
+#increment n
+n=0
+
+for(i in 1:num_samps){
+  temp <- (1-(1/n))**n
+  points[i,1] = n
+  points[i,2] = temp
+  n = n+1
+}
+points
+plot(points, xlim=c(0,100), ylim=c(0.2, 0.4), main='bootstrap P(not pick datum)', xlab='n', ylab='P')
+
+####################################################################################################
+
+question 9 in Python
+
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[23]:
+
+
+from IPython.core.display import display, HTML
+display(HTML("<style>.container { width:100% !important; }</style>"))
+
+
+# In[49]:
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+get_ipython().run_line_magic('matplotlib', 'inline')
+# show the bias in sample variance
+
+# vars for IQ
+pop_mean = 100.0
+pop_sigma = 15.0
+pop_size = 1000000
+
+population = np.random.normal(pop_mean, pop_sigma, pop_size)
+
+_ = plt.hist(population, bins='auto')
+#plt.show()
+plt.savefig('iq_pop.png')
+
+
+# In[50]:
+
+
+# sample size of 30 from population
+population[:10]
+num_samps = 10000
+
+#n=30
+samps_mini = np.random.choice(population, (num_samps, 30), replace=True)
+#n=100
+samps_low = np.random.choice(population, (num_samps, 100), replace=True)
+#n=1000
+samps_mid = np.random.choice(population, (num_samps, 1000), replace=True)
+#n=10000
+samps_hi = np.random.choice(population, (num_samps, 10000), replace=True)
+
+# example sample to show non-normal
+_ = plt.hist(samps_mini[3], bins=20)
+#plt.show()
+samps_mini.shape
+plt.savefig('n30sample.png')
+
+
+# In[46]:
+
+
+means_mini = np.mean(samps_mini, axis=1)
+print("mini max {} and min {}".format(max(means_mini),min(means_mini)))
+means_low = np.mean(samps_low, axis=1)
+print("low max {} and min {}".format(max(means_low),min(means_low)))
+means_mid = np.mean(samps_mid, axis=1)
+print("mid max {} and min {}".format(max(means_mid),min(means_mid)))
+means_hi = np.mean(samps_hi, axis=1)
+print("hi max {} and min {}".format(max(means_hi),min(means_hi)))
+kwargs = dict(histtype='stepfilled', alpha=0.3, bins=20)
+
+plt.hist(means_mini, **kwargs, color='blue', label='n=30')
+plt.hist(means_low, **kwargs, color='green', label='n=100')
+plt.hist(means_mid, **kwargs, color= 'yellow', label='n=1k')
+plt.hist(means_hi, **kwargs, color='red', label='n=10k')
+plt.title('mu at n=30,100,1k,10k')
+plt.legend()
+plt.savefig('mus.png')
+
+
+# In[45]:
+
+
+# calculate var with n, n-1, n+1, compare with population variance
+pop_var = np.var(population)
+pop_var
+
+# for n=30
+var_mini_n = np.zeros(num_samps, dtype=np.float64)
+np.var(samps_mini, axis=1, dtype=np.float64, out=var_mini_n)
+var_mini_dof = np.zeros(num_samps, dtype=np.float64)
+np.var(samps_mini, axis=1, dtype=np.float64, out=var_mini_dof, ddof=1)
+
+# for n=100
+var_low_n = np.zeros(num_samps, dtype=np.float64)
+np.var(samps_low, axis=1, dtype=np.float64, out=var_low_n)
+var_low_dof = np.zeros(num_samps, dtype=np.float64)
+np.var(samps_low, axis=1, dtype=np.float64, out=var_low_dof, ddof=1)
+
+# for n=1000
+var_mid_n = np.zeros(num_samps, dtype=np.float64)
+np.var(samps_mid, axis=1, dtype=np.float64, out=var_mid_n)
+var_mid_dof = np.zeros(num_samps, dtype=np.float64)
+np.var(samps_mid, axis=1, dtype=np.float64, out=var_mid_dof, ddof=1)
+
+# for n=10k
+var_hi_n = np.zeros(num_samps, dtype=np.float64)
+np.var(samps_hi, axis=1, dtype=np.float64, out=var_hi_n)
+var_hi_dof = np.zeros(num_samps, dtype=np.float64)
+np.var(samps_hi, axis=1, dtype=np.float64, out=var_hi_dof, ddof=1)
+
+n_bins = 100
+
+kwargs = dict(histtype='stepfilled', bins=20) #alpha=0.3
+fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(9,6))
+ax0, ax1, ax2, ax3 = axes.flatten()
+
+ax0.hist(var_mini_n, **kwargs, color='red')
+ax0.hist(var_mini_dof, **kwargs, color='blue')
+ax0.set_title('var n=30, bias:{},unbias:{}'.format(round(np.mean(var_mini_n),2),
+              round(np.mean(var_mini_dof),2)),fontsize=11)
+
+ax1.hist(var_low_n, **kwargs, color='red')
+ax1.hist(var_low_dof, **kwargs, color='blue')
+ax1.set_title('var n=100, bias:{},unbias:{}'.format(round(np.mean(var_low_n),2),
+              round(np.mean(var_low_dof),2)),fontsize=11)
+
+ax2.hist(var_mid_n, **kwargs, color='red')
+ax2.hist(var_mid_dof, **kwargs, color='blue')
+ax2.set_title('var n=1k, bias:{},unbias:{}'.format(round(np.mean(var_mid_n),2),
+              round(np.mean(var_mid_dof),2)),fontsize=11)
+
+ax3.hist(var_hi_n, **kwargs, color='red')
+ax3.hist(var_hi_dof, **kwargs, color='blue')
+ax3.set_title('var n=10k, bias:{},unbias:{}'.format(round(np.mean(var_hi_n),2),
+              round(np.mean(var_hi_dof),2)),fontsize=11)
+
+plt.savefig('var_distrib.png')
+
+
+# In[ ]:
+
+
+#bootstrap from sample of size n, a sample of size n
+
+
+
+
