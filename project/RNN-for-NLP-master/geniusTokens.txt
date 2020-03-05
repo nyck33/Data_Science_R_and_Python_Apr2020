@@ -1,0 +1,13 @@
+Version 80.0.3987.122 (Official Build) (64-bit)
+
+Genius client id:
+
+VsGvI4qNNbQhY-TiuTpnrWLhTVQpukTrWX4RajLNAcHEOQXGlQSpzAMEJGmkbF0u
+
+client secret:
+
+GpafnHKOEpS1WQB_L_2mYHnPVXbAPtvGBVLKT4BegCoxFUXsM7dh3uDnz5RGbQ63s8Ee1OEjGybmNAuVQFuxPQ
+
+client access token:
+
+Cs_LjJh_WYiqB_wYyqvvg1kW0azpYuskh1riVjnfC0_zYd9vpS4w9B9W25Me0Z8f

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7b216371-f476-4c3d-bcde-7150800df520" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../assignment3/.ipynb_checkpoints/unbiased_sample_variance-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../../assignment3/.ipynb_checkpoints/unbiased_sample_variance-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../assignment3/NobuA3Code.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../assignment3/NobuA3Code.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../assignment3/unbiased_sample_variance.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../../assignment3/unbiased_sample_variance.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kalman-and-Bayesian-Filters-in-Python/12-Particle-Filters.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Kalman-and-Bayesian-Filters-in-Python/12-Particle-Filters.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../global_burden_disease_death_estimates_sex_2008.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../project_ideas.txt" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1YhXFjFN5FGfdsjSEVk4tlO1ML6" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7b216371-f476-4c3d-bcde-7150800df520" name="Default Changelist" comment="" />
+      <created>1583395697575</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1583395697575</updated>
+      <workItem from="1583395701426" duration="30000" />
+    </task>
+    <servers />
+  </component>
+</project>

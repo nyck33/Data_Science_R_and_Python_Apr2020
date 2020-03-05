@@ -1,0 +1,17 @@
+Params for Thiem:
+
+frames to save, infix: string frame file name, dims: number of dims for each particle, control: sigma of normal distrib for new particles generated, importance weighting in pixels, alpha is adaptive model update, how much to change current template for each update step
+
+
+
+naive_pf_tracker_demo(videos[4], textfiles[5], [14,32,46], '1-e',
+                          play_video=True, num_particles=1000, dimensions=2,
+                          control=50, sim_std=10, alpha=0.1)
+
+Nadal for out2.mp4
+
+def ps6_1_e():
+    naive_pf_tracker_demo(videos[3], textfiles[4], [14,32,46], '1-e',
+                          play_video=True, num_particles=1000, dimensions=2,
+                          control=5, sim_std=10, alpha=0)
+

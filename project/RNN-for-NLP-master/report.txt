@@ -1,0 +1,41 @@
+TensorFlow 2.0 Upgrade Script
+-----------------------------
+Converted 1 files
+Detected 3 issues that require attention
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+File: tf1_tv_script.py
+--------------------------------------------------------------------------------
+tf1_tv_script.py:338:12: WARNING: tf.nn.embedding_lookup requires manual check. `partition_strategy` has been removed from tf.nn.embedding_lookup.  The 'div' strategy will be used by default.
+tf1_tv_script.py:422:13: ERROR: Using member tf.contrib.layers.fully_connected in deprecated module tf.contrib. tf.contrib.layers.fully_connected cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+tf1_tv_script.py:632:4: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+================================================================================
+Detailed log follows:
+
+================================================================================
+--------------------------------------------------------------------------------
+Processing file 'tf1_tv_script.py'
+ outputting to 'tf2_tvscript.py'
+--------------------------------------------------------------------------------
+
+256:12: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+261:14: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+264:18: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+297:11: INFO: Renamed 'tf.contrib.rnn.BasicLSTMCell' to 'tf.compat.v1.nn.rnn_cell.BasicLSTMCell'
+302:11: INFO: Renamed 'tf.contrib.rnn.MultiRNNCell' to 'tf.compat.v1.nn.rnn_cell.MultiRNNCell'
+302:40: INFO: Renamed 'tf.contrib.rnn.BasicLSTMCell' to 'tf.compat.v1.nn.rnn_cell.BasicLSTMCell'
+337:28: INFO: Renamed 'tf.random_uniform' to 'tf.random.uniform'
+338:12: INFO: Added keywords to args of function 'tf.nn.embedding_lookup'
+338:12: WARNING: tf.nn.embedding_lookup requires manual check. `partition_strategy` has been removed from tf.nn.embedding_lookup.  The 'div' strategy will be used by default.
+381:27: INFO: Renamed 'tf.nn.dynamic_rnn' to 'tf.compat.v1.nn.dynamic_rnn'
+422:13: ERROR: Using member tf.contrib.layers.fully_connected in deprecated module tf.contrib. tf.contrib.layers.fully_connected cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+575:23: INFO: Added keywords to args of function 'tf.shape'
+589:16: INFO: Renamed 'tf.train.AdamOptimizer' to 'tf.compat.v1.train.AdamOptimizer'
+608:5: INFO: Renamed 'tf.Session' to 'tf.compat.v1.Session'
+609:13: INFO: Renamed 'tf.global_variables_initializer' to 'tf.compat.v1.global_variables_initializer'
+631:12: INFO: Renamed 'tf.train.Saver' to 'tf.compat.v1.train.Saver'
+632:4: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+756:5: INFO: Renamed 'tf.Session' to 'tf.compat.v1.Session'
+758:13: INFO: Renamed 'tf.train.import_meta_graph' to 'tf.compat.v1.train.import_meta_graph'
+--------------------------------------------------------------------------------
+

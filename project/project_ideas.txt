@@ -1,7 +1,0 @@
-Reinforcement learning for Asteroids navigation.
-
-Particle filters build a robot that localizes in a simple environment.
-
-Build blockchain to store data,images, pdf, other file formats.
-
-Track one product from source to table, litre of local milk.  Something local.  

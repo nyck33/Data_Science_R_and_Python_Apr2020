@@ -292,6 +292,7 @@ plt.savefig('var_distrib.png')
 
 #bootstrap from sample of size n, a sample of size n
 
-
+# and a bit more not included for the density and box plots
+# of variances
 
 
